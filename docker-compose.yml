@@ -12,19 +12,19 @@ services:
       - webserver_network
     volumes:
       - ./nginx:/etc/nginx/conf.d
-      - ./src/angular_frontend:/static/angular:ro # read only: ro
-      - ./src/django_backend:/django
+      - ./src/frontend:/static/angular:ro # read only: ro
+      - ./src/backend:/django
 
   django:
     restart: always
-    build: ./src/django_backend
+    build: ./src/backend
     container_name: django
     expose:
       - "8000"
     networks:
       - webserver_network
     volumes:
-      - ./src/django_backend:/django
+      - ./src/backend:/django
 
 volumes:
   django_volume:
