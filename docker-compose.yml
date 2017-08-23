@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  nginx:
+    restart: always
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - webserver_network
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./src/angular_frontend:/static/angular:ro # read only: ro
+      - ./src/django_backend:/django
+
+  django:
+    restart: always
+    build: ./src/django_backend
+    container_name: django
+    expose:
+      - "8000"
+    networks:
+      - webserver_network
+    volumes:
+      - ./src/django_backend:/django
+
+volumes:
+  django_volume:
+  static_volume:
+
+networks:
+  webserver_network:
+    driver: bridge
