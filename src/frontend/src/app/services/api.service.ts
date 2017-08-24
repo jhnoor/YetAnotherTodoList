@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { IFilters, ITodoList, ITodo } from '../model';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ApiService {
@@ -26,10 +27,11 @@ export class ApiService {
     return this.http.get<ITodo>(`api/todolist/${id}`, { params: params });
   }
 
-  changeTodoStatus(todoId: number, newStatus: boolean) {
-    const todo = this._todoList.results.find(t => t.id === todoId);
+  changeTodoStatus(todo: ITodo, newStatus: boolean) {
     todo.done = newStatus;
-    this.http.put(`api/todolist/${todoId}/`, todo).subscribe(); // optimistic update
+    this.http.put(`api/todolist/${todo.id}/`, todo)
+      .catch(err => { todo.done = !newStatus; throw err; })
+      .subscribe(); // TheBadFix
   }
 
   changeFilters(filters: IFilters): void {

@@ -13,6 +13,6 @@ export class TodoComponent {
   constructor(private api: ApiService) { }
 
   onTodoChange(newStatus: boolean): void {
-    this.api.changeTodoStatus(this.todo.id, newStatus);
+    this.api.changeTodoStatus(this.todo, newStatus);
   }
 }

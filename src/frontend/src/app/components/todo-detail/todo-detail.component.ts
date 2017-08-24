@@ -17,6 +17,6 @@ export class TodoDetailComponent {
   }
 
   onTodoChange(newStatus: boolean): void {
-    this.api.changeTodoStatus(this.todo.id, newStatus);
+    this.api.changeTodoStatus(this.todo, newStatus);
   }
 }
