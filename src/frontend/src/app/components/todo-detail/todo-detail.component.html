@@ -1,0 +1,9 @@
+<md-card *ngIf="todo" color="primary" style="margin-bottom: 0.2rem">
+  <md-card-title>{{todo.title}}</md-card-title>
+  <md-card-subtitle>{{todo.text}}</md-card-subtitle>
+  <md-action-row>
+    <button md-raised-button [color]="[todo.done ? 'primary':'warn']" (click)="onTodoChange(!todo.done)">
+      {{[todo.done ? 'Undo': 'Done']}}
+    </button>
+  </md-action-row>
+</md-card>

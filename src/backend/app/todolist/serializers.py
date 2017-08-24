@@ -4,6 +4,8 @@ from app.todolist import models
 
 
 class TodoSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.ReadOnlyField()
+    
     class Meta:
         model = models.Todo
         fields = '__all__'
