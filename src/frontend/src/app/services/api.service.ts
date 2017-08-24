@@ -14,7 +14,6 @@ export class ApiService {
   filters: IFilters = { ordering: this.filterChoices[0] }; // Not retrieving filter choice from url if there is
 
   constructor(private http: HttpClient) {
-    this.refetch();
   }
 
   get todos(): ITodo[] {
