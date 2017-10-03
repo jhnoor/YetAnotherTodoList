@@ -12,7 +12,7 @@ import 'rxjs/add/operator/mergeMap';
 export class TodoDetailComponent {
   todo: ITodo;
 
-  constructor(public api: ApiService,  private route: ActivatedRoute) {
+  constructor(public api: ApiService, private route: ActivatedRoute) {
     route.params.mergeMap(p => this.api.findTodo(+p['id'])).subscribe(t => this.todo = t);
   }
 

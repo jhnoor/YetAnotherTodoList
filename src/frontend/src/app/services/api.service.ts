@@ -30,7 +30,7 @@ export class ApiService {
     todo.done = newStatus;
     this.http.put(`api/todolist/${todo.id}/`, todo)
       .catch(err => { todo.done = !newStatus; throw err; })
-      .subscribe(); // TheBadFix
+      .subscribe();
   }
 
   changeFilters(filters: IFilters): void {
