@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ApiService } from '../../services/api.service';
+import { ActivatedRoute, Params } from '@angular/router';
+import { StoreService } from '../../services/store.service';
 import { IFilters } from '../../model';
+import 'rxjs/add/operator/take';
 
 @Component({
   selector: 'app-todolist',
@@ -9,25 +10,20 @@ import { IFilters } from '../../model';
   styleUrls: ['./todolist.component.css']
 })
 export class TodolistComponent {
+  filterChoices = ['created_at', 'modified_at', 'title'];
+  filters: IFilters = { ordering: this.filterChoices[0] };
 
   // URL -> client state
-  constructor(public api: ApiService, private router: Router, private route: ActivatedRoute) {
-    route.params.subscribe(p => {
-      const filters: IFilters = {ordering: p.ordering || null};
-      this.api.changeFilters(filters);
+  constructor(public store: StoreService, private route: ActivatedRoute) {
+    route.queryParamMap.take(1).subscribe(p => {
+      this.filters = { ordering: p.get('ordering') || this.filters.ordering };
+      // this.store.setFilterAction(this.filters);
+      this.store.getTodoListAction(this.filters);
     });
   }
 
-  // client state -> URL
-  onFiltersChange(filters: IFilters) {
-    this.api.changeFilters(filters);
-    this.router.navigate(['todos', this.createParams(filters)]);
+  onFiltersChange() {
+    // this.store.setFilterAction(this.filters);
+    this.store.getTodoListAction(this.filters);
   }
-
-  private createParams(filters: IFilters): Params {
-    const p:any = {};
-    if (filters.ordering) p.ordering = filters.ordering;
-    return p;
-  }
-
 }

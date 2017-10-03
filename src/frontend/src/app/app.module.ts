@@ -11,7 +11,8 @@ import { AppComponent } from './app.component';
 import { TodolistComponent } from './components/todolist/todolist.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
-import { ApiService } from './services/api.service';
+import { ApiService } from 'app/services/api.service';
+import { StoreService } from 'app/services/store.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { ApiService } from './services/api.service';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

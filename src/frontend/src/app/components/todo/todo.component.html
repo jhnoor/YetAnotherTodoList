@@ -2,8 +2,8 @@
   <md-card-title><a [routerLink]="['/todos/', todo.id]">{{todo.title}}</a></md-card-title>
   <md-card-subtitle>{{todo.text}}</md-card-subtitle>
   <md-action-row>
-    <button md-raised-button [color]="[todo.done ? 'primary':'warn']" (click)="onTodoChange(!todo.done)">
-      {{[todo.done ? 'Undo': 'Done']}}
+    <button md-raised-button [color]="[todo.done ? 'primary':'warn']" (click)="toggle()">
+      {{[todo.done ? 'Done!': 'Set as done']}}
     </button>
   </md-action-row>
 </md-card>

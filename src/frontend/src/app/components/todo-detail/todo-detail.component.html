@@ -3,7 +3,7 @@
   <md-card-subtitle>{{todo.text}}</md-card-subtitle>
   <md-action-row>
     <button md-raised-button [color]="[todo.done ? 'primary':'warn']" (click)="onTodoChange(!todo.done)">
-      {{[todo.done ? 'Undo': 'Done']}}
+      {{[todo.done ? 'Done!': 'Set as done']}}
     </button>
   </md-action-row>
 </md-card>

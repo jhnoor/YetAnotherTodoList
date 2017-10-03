@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../services/api.service';
+import { StoreService } from 'app/services/store.service';
 import { ITodo } from '../../model';
 import 'rxjs/add/operator/mergeMap';
 
@@ -12,11 +12,11 @@ import 'rxjs/add/operator/mergeMap';
 export class TodoDetailComponent {
   todo: ITodo;
 
-  constructor(public api: ApiService, private route: ActivatedRoute) {
-    route.params.mergeMap(p => this.api.findTodo(+p['id'])).subscribe(t => this.todo = t);
+  constructor(public store: StoreService, private route: ActivatedRoute) {
+    route.params.take(1).mergeMap(p => this.store.getTodoAction(+p['id'])).subscribe(t => this.todo = t);;
   }
 
   onTodoChange(newStatus: boolean): void {
-    this.api.changeTodoStatus(this.todo, newStatus);
+    this.store.toggleTodoStatus(this.todo, newStatus).subscribe(t => this.todo = t);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ApiService } from '../../services/api.service';
+import { StoreService } from 'app/services/store.service';
 import { ITodo } from '../../model';
 
 @Component({
@@ -10,9 +10,9 @@ import { ITodo } from '../../model';
 export class TodoComponent {
   @Input() todo: ITodo;
 
-  constructor(private api: ApiService) { }
+  constructor(private store: StoreService) { }
 
-  onTodoChange(newStatus: boolean): void {
-    this.api.changeTodoStatus(this.todo, newStatus);
+  toggle(): void {
+    this.store.toggleTodoStatus(this.todo, !this.todo.done).subscribe(t => this.todo = t);
   }
 }

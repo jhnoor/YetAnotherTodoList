@@ -1,11 +1,11 @@
 <section>
-  <md-radio-group [(ngModel)]="api.filters.ordering" (ngModelChange)="onFiltersChange(api.filters)">
-    <md-radio-button style="margin-right: 2rem;" *ngFor="let filter of api.filterChoices" [value]="filter">
+  <md-radio-group [(ngModel)]="filters.ordering" (ngModelChange)="onFiltersChange()">
+    <md-radio-button style="margin-right: 2rem;" *ngFor="let filter of filterChoices" [value]="filter">
       {{filter}}
     </md-radio-button>
   </md-radio-group>
 </section>
 
 <section>
-  <app-todo *ngFor="let todo of api.todos" [todo]="todo"></app-todo>
+  <app-todo *ngFor="let todo of (store.todoList$ | async)?.results" [todo]="todo"></app-todo>
 </section>
