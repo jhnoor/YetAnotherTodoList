@@ -17,13 +17,11 @@ export class TodolistComponent {
   constructor(public store: StoreService, private route: ActivatedRoute) {
     route.queryParamMap.take(1).subscribe(p => {
       this.filters = { ordering: p.get('ordering') || this.filters.ordering };
-      // this.store.setFilterAction(this.filters);
       this.store.getTodoListAction(this.filters);
     });
   }
 
   onFiltersChange() {
-    // this.store.setFilterAction(this.filters);
     this.store.getTodoListAction(this.filters);
   }
 }
