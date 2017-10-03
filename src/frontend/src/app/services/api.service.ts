@@ -9,9 +9,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  toggleTodoStatus(todo: ITodo, newStatus: boolean): Observable<ITodo> {
-    todo.done = newStatus;
-    return this.http.put<ITodo>(`api/todolist/${todo.id}/`, todo);
+  toggleTodoStatus(todo: ITodo, status: boolean): Observable<ITodo> {
+    return this.http.put<ITodo>(`api/todolist/${todo.id}/`, {...todo, done: status});
   }
 
   getTodoList(filters: IFilters): Observable<ITodoList> {

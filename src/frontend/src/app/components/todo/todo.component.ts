@@ -13,6 +13,8 @@ export class TodoComponent {
   constructor(private store: StoreService) { }
 
   toggle(): void {
-    this.store.toggleTodoStatus(this.todo, !this.todo.done).subscribe(t => this.todo = t);
+    this.store.toggleTodoStatus(this.todo, this.todo.done ? false : true).subscribe(t => {
+      this.todo = t;
+    });
   }
 }
