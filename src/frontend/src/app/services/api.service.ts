@@ -14,7 +14,7 @@ export class ApiService {
   }
 
   getTodoList(filters: IFilters): Observable<ITodoList> {
-    const params = new HttpParams().set("ordering", filters.ordering);
+    const params = new HttpParams().set('ordering', filters.ordering);
     return this.http.get<ITodoList>(`api/todolist/`, { params: params });
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StoreService } from 'app/services/store.service';
 import { ITodo } from '../../model';
-import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-todo-detail',
@@ -13,7 +13,7 @@ export class TodoDetailComponent {
   todo: ITodo;
 
   constructor(public store: StoreService, private route: ActivatedRoute) {
-    route.params.take(1).mergeMap(p => this.store.getTodoAction(+p['id'])).subscribe(t => this.todo = t);;
+    route.params.take(1).switchMap(p => this.store.getTodoAction(+p['id'])).subscribe(t => this.todo = t);
   }
 
   onTodoChange(newStatus: boolean): void {
