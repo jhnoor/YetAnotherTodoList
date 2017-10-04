@@ -17,12 +17,13 @@ export class ApiService {
   }
 
   get todos(): ITodo[] {
-    if (this._todoList)
+    if (this._todoList) {
       return this._todoList.results;
+    }
   }
 
   findTodo(id: number): Observable<ITodo> {
-    const params = new HttpParams().set("ordering", this.filters.ordering);
+    const params = new HttpParams().set('ordering', this.filters.ordering);
     return this.http.get<ITodo>(`api/todolist/${id}`, { params: params });
   }
 
@@ -39,7 +40,7 @@ export class ApiService {
   }
 
   private refetch(): void {
-    const params = new HttpParams().set("ordering", this.filters.ordering);
+    const params = new HttpParams().set('ordering', this.filters.ordering);
     this.http.get<ITodoList>(`api/todolist/`, { params: params })
       .subscribe(t => this._todoList = t);
   }

@@ -13,7 +13,7 @@ export class TodolistComponent {
   // URL -> client state
   constructor(public api: ApiService, private router: Router, private route: ActivatedRoute) {
     route.params.subscribe(p => {
-      const filters: IFilters = {ordering: p.ordering || null};
+      const filters: IFilters = { ordering: p.ordering || null };
       this.api.changeFilters(filters);
     });
   }
@@ -25,8 +25,10 @@ export class TodolistComponent {
   }
 
   private createParams(filters: IFilters): Params {
-    const p:any = {};
-    if (filters.ordering) p.ordering = filters.ordering;
+    const p: any = {};
+    if (filters.ordering) {
+      p.ordering = filters.ordering;
+    }
     return p;
   }
 
